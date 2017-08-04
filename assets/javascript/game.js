@@ -63,6 +63,10 @@ function reset()
 	startGame();
 }
 
+//MAIN PROCCESS
+//-------------------------------------------	
+//Initiates the Code
+
 startGame();
 
 document.onkeyup = function(event)
@@ -172,6 +176,8 @@ function winLose()
 	if(rightGuessCounter === numBlanks)
 	{	
 		winElement.play();
+		document.getElementById("winpic").innerHTML ='<img src=36448325-mario-pictures.png"' + wordBank+
+  		'/spinner.gif" title="Loading..." alt="Loading...">';
 		//Counts Wins 
 		winCount++;
 		//Changes HTML
@@ -192,6 +198,4 @@ function winLose()
 	}
 }
 
-//MAIN PROCCESS
-//-------------------------------------------	
-//Initiates the Code
+
