@@ -29,9 +29,9 @@ var guessesLeft = 9;
 var rightGuessCounter = 0;
 // sounds
 var winElement = document.createElement("audio");
-winElement.setAttribute("src", "Assets/sound/Super Mario Bros - Level Complete.mp3");
+winElement.setAttribute("src", "assets/sound/Super Mario Bros - Level Complete.mp3");
 var loseElement = document.createElement("audio");
-loseElement.setAttribute("src", "Assets/sound/210-game-over.mp3");
+loseElement.setAttribute("src", "assets/sound/210-game-over.mp3");
 //FUNCTIONS
 //----------------------------------------
 function reset()
