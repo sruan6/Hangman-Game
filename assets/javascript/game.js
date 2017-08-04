@@ -11,7 +11,7 @@ var doubleWord = ['a','b','c',
 				  'v','w','x',
 				  'y','z'];
 //Holds the all the words
-var wordBank =['spiderman','thor','captainamerica', 'ironman','hulk','blackwidow','hawkeye'];
+var wordBank =['mario','luigi','lucas', 'ness','link','fox','pikachu'];
 //Holds choosenWord
 var choosenWord = "";
 //Holds letters in word
@@ -27,6 +27,11 @@ var winCount = 0;
 var loseCount = 0;
 var guessesLeft = 9;
 var rightGuessCounter = 0;
+// sounds
+var winElement = document.createElement("audio");
+winElement.setAttribute("src", "Assets/sound/Super Mario Bros - Level Complete.mp3");
+var loseElement = document.createElement("audio");
+loseElement.setAttribute("src", "Assets/sound/210-game-over.mp3");
 //FUNCTIONS
 //----------------------------------------
 function reset()
@@ -165,7 +170,8 @@ function winLose()
 {
 	// When number blanks if filled with right words then you win
 	if(rightGuessCounter === numBlanks)
-	{
+	{	
+		winElement.play();
 		//Counts Wins 
 		winCount++;
 		//Changes HTML
@@ -175,7 +181,8 @@ function winLose()
 	}
 	// When number of Guesses reaches 0 then You lose
 	else if(guessesLeft === 0)
-	{
+	{	
+		loseElement.play();
 		//Counts losses
 		loseCount++;
 		//Changes HTML

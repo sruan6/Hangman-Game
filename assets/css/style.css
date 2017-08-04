@@ -1,5 +1,8 @@
 .jumbotron {
 	text-align: center;
+	background: url(../images/Super-Smash-Bros.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 .owner {
 	text-align: center;
