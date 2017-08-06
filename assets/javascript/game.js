@@ -11,7 +11,7 @@ var doubleWord = ['a','b','c',
 				  'v','w','x',
 				  'y','z'];
 //Holds the all the words
-var wordBank =['mario','luigi','lucas', 'ness','link','fox','pikachu'];
+var wordBank =['mario', 'luigi','lucas', 'ness','link','fox','pikachu'];
 //Holds choosenWord
 var choosenWord = "";
 //Holds letters in word
@@ -32,6 +32,13 @@ var winElement = document.createElement("audio");
 winElement.setAttribute("src", "assets/sound/Super Mario Bros - Level Complete.mp3");
 var loseElement = document.createElement("audio");
 loseElement.setAttribute("src", "assets/sound/210-game-over.mp3");
+
+// images
+var fruitsArray = [
+  { name: 'Banana', image: '../images/pikachu.jpg' }, 
+  { name: 'Apple', image: 'apple.jpg' }, 
+  { name: 'Orange', image: 'orange.jpg' }
+];
 //FUNCTIONS
 //----------------------------------------
 function reset()
@@ -62,7 +69,6 @@ function reset()
 	test=false;
 	startGame();
 }
-
 //MAIN PROCCESS
 //-------------------------------------------	
 //Initiates the Code
@@ -176,14 +182,12 @@ function winLose()
 	if(rightGuessCounter === numBlanks)
 	{	
 		winElement.play();
-		document.getElementById("winpic").innerHTML ='<img src=36448325-mario-pictures.png"' + wordBank+
-  		'/spinner.gif" title="Loading..." alt="Loading...">';
 		//Counts Wins 
 		winCount++;
 		//Changes HTML
 		document.getElementById('winCounter').innerHTML = winCount;
-		alert('You Win');
-		reset();
+		setTimeout(function(){ alert('You Win');  }, 10);
+		setTimeout(function(){ reset();  }, 1000);
 	}
 	// When number of Guesses reaches 0 then You lose
 	else if(guessesLeft === 0)
@@ -193,9 +197,10 @@ function winLose()
 		loseCount++;
 		//Changes HTML
 		document.getElementById('lossCounter').innerHTML = loseCount;
-		alert('You Lose');
-		reset();
+		setTimeout(function(){ alert('You Lose'); }, 10);
+		setTimeout(function(){ reset(); }, 1000);
 	}
 }
+
 
 
