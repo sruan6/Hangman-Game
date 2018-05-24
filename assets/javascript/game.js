@@ -1,17 +1,18 @@
 //GLOBAL VARIABLES
 //---------------------------------------
 // Used to record how many times a letter can be pressed
-var doubleWord = ['a','b','c',
-				  'd','e','f',
-				  'g','h','i',
-				  'j','k','l',
-				  'm','n','o',
-				  'p','q','r',
-				  's','t','u',
-				  'v','w','x',
-				  'y','z'];
+var doubleWord = ['A','B','C',
+					  'D','E','F',
+					  'G','H','I',
+					  'J','K','L',
+					  'M','N','O',
+					  'P','Q','R',
+					  'S','T','U',
+					  'V','W','X',
+					  'Y','Z'];
 //Holds the all the words
-var wordBank =['mario', 'luigi','lucas', 'ness','link','fox','pikachu'];
+var wordBank =['AATROX', 'AHRI', 'AKALI', 'ALISTAR', 'AMUMU', 'ANIVIA', 'ANNIE', 'ASHE', 'AURELIONSOL', 'AZIR', 'BARD', 'BLITZCRANK', 'BRAND', 'BRAUM',
+ 'CAITLYN', 'CAMILLE', 'CASSIOPEIA', 'CHOGATH', 'CORKI', 'DARIUS', 'DIANA', 'DRMUNDO', 'DRAVEN', 'EKKO', 'ELISE', 'EVELYNN', 'EZREAL', 'FIIDLESTICKS', 'FIORA', 'FIZZ', 'GAILO', 'GANGPLANK', 'GAREN', 'GNAR', 'GRAGAS', 'GRAVES', 'HECARIM', 'HEIMERDINGER', 'ILLAOI', 'IRELLA', 'IVERN', 'JANNA'];
 //Holds choosenWord
 var choosenWord = "";
 //Holds letters in word
@@ -25,8 +26,11 @@ var wrongLetters = [];
 //Counters
 var winCount = 0;
 var loseCount = 0;
-var guessesLeft = 9;
+var guessesLeft = 5;
 var rightGuessCounter = 0;
+var progressBar = 100;
+var NewprogressBar = 0;
+var totalGame = 0;
 // sounds
 var winElement = document.createElement("audio");
 winElement.setAttribute("src", "assets/sound/Super Mario Bros - Level Complete.mp3");
@@ -54,18 +58,19 @@ function reset()
 	//===========================================================
 	letterGuessed = 0;
 	rightGuessCounter = 0;
-	guessesLeft = 9;
+	guessesLeft = 5;
+	progressBar = 100;
 	wrongLetters =[];
 	blanksAndSuccesses =[];
-	doubleWord = ['a','b','c',
-					  'd','e','f',
-					  'g','h','i',
-					  'j','k','l',
-					  'm','n','o',
-					  'p','q','r',
-					  's','t','u',
-					  'v','w','x',
-					  'y','z'];
+	doubleWord = ['A','B','C',
+					  'D','E','F',
+					  'G','H','I',
+					  'J','K','L',
+					  'M','N','O',
+					  'P','Q','R',
+					  'S','T','U',
+					  'V','W','X',
+					  'Y','Z'];
 	test=false;
 	startGame();
 }
@@ -78,7 +83,7 @@ startGame();
 document.onkeyup = function(event)
 {
 	test = true;
-	var letterGuessed = event.key;
+	var letterGuessed = event.key.toUpperCase();
 	for(var i = 0; i < doubleWord.length; i++)
 	{	
 		if(letterGuessed === doubleWord[i] && test === true)
@@ -107,18 +112,18 @@ function startGame()
 	//RESET
 	//===========================================================
 	rightGuessCounter = 0;
-	guessesLeft = 9;
+	guessesLeft = 5;
 	wrongLetters =[];
 	blanksAndSuccesses =[];
-	doubleWord = ['a','b','c',
-					  'd','e','f',
-					  'g','h','i',
-					  'j','k','l',
-					  'm','n','o',
-					  'p','q','r',
-					  's','t','u',
-					  'v','w','x',
-					  'y','z'];
+	doubleWord = ['A','B','C',
+					  'D','E','F',
+					  'G','H','I',
+					  'J','K','L',
+					  'M','N','O',
+					  'P','Q','R',
+					  'S','T','U',
+					  'V','W','X',
+					  'Y','Z'];
 
 	//Populate blanks
 	for(var i = 0; i< numBlanks; i++)
@@ -133,11 +138,16 @@ function startGame()
 	document.getElementById('winCounter').innerHTML = winCount;
 	document.getElementById('lossCounter').innerHTML = loseCount;
 	document.getElementById('wrongGuesses').innerHTML = wrongLetters;
+	document.getElementById('progressbar').style.width = '100%';
+	if(winCount >= 1){
+	document.getElementById('win').innerHTML = winCount+' WINS';
+	}
 	// Testing / Debugging
 	console.log(choosenWord);
 	console.log(lettersInWord);
 	console.log(numBlanks);
 	console.log(blanksAndSuccesses);
+	ranking();
 }
 
 function compareLetters(userKey)
@@ -165,12 +175,16 @@ function compareLetters(userKey)
 				{
 					wrongLetters.push(userKey);
 					guessesLeft--;
+					NewprogressBar = (progressBar-=20)
+				
 					//Changes HTML
 					document.getElementById('numGuesses').innerHTML = guessesLeft;
 					document.getElementById('wrongGuesses').innerHTML = wrongLetters;
+					document.getElementById('progressbar').style.width = NewprogressBar+"%";
 					//Test / Debug
 					console.log('Wrong Letters = ' + wrongLetters);
 					console.log('Guesses left are ' + guessesLeft);
+					console.log(progressBar)
 				}
 			
 			
@@ -184,23 +198,69 @@ function winLose()
 		winElement.play();
 		//Counts Wins 
 		winCount++;
+		totalGame++;
 		//Changes HTML
 		document.getElementById('winCounter').innerHTML = winCount;
-		setTimeout(function(){ alert('You Win');  }, 10);
-		setTimeout(function(){ reset();  }, 1000);
+		setTimeout(function(){ alert('VICTORY');  }, 10);
+		setTimeout(function(){ 
+			reset();  
+		}, 1000);
 	}
 	// When number of Guesses reaches 0 then You lose
-	else if(guessesLeft === 0)
+	else if(progressBar === 0)
 	{	
 		loseElement.play();
 		//Counts losses
 		loseCount++;
+		totalGame++;
 		//Changes HTML
 		document.getElementById('lossCounter').innerHTML = loseCount;
-		setTimeout(function(){ alert('You Lose'); }, 10);
-		setTimeout(function(){ reset(); }, 1000);
+		setTimeout(function(){ alert('DEFEAT'); }, 10);
+		setTimeout(function(){ 
+			reset(); 
+		}, 1000);
 	}
 }
+function ranking()
+{
+	var winRate = ((winCount)/(totalGame));
 
+	//rank
+	if( totalGame >= 9) {
+		if(winRate == 1) {
+			document.getElementById('ranking').src = "./assets/images/challenger.png";
+			console.log("winRate:"+ winRate + "totalGame:"+ totalGame);
+			document.getElementById('current_ranking').innerHTML = 'CHALLENGER';
+		}else if(winRate < 1 && winRate > .9){
+			document.getElementById('ranking').src = "./assets/images/master.png";
+			console.log("winRate:"+ winRate + "totalGame:"+ totalGame);
+			document.getElementById('current_ranking').innerHTML = 'MASTER';
+		}else if(winRate < .91 && winRate > .8){
+			document.getElementById('ranking').src = "./assets/images/diamond.png";
+			console.log("winRate:"+ winRate + "totalGame:"+ totalGame);
+			document.getElementById('current_ranking').innerHTML = 'DIAMOND';
+		}else if(winRate < .81 && winRate > .7){
+			document.getElementById('ranking').src = "./assets/images/platinium.png";
+			console.log("winRate:"+ winRate + "totalGame:"+ totalGame);
+			document.getElementById('current_ranking').innerHTML = 'PLATINUM';
+		}else if(winRate < .71 && winRate > .6){
+			document.getElementById('ranking').src = "./assets/images/gold.png";
+			console.log("winRate:"+ winRate + "totalGame:"+ totalGame);
+			document.getElementById('current_ranking').innerHTML = 'GOLD';
+		}else if(winRate < .61 && winRate > .5){
+			document.getElementById('ranking').src = "./assets/images/silver.png";
+			console.log("winRate:"+ winRate + "totalGame:"+ totalGame);
+			document.getElementById('current_ranking').innerHTML = 'SILVER';
+		}else{
+			document.getElementById('ranking').src = "./assets/images/bronze.png";;
+			console.log("winRate:"+ winRate + "totalGame:"+ totalGame);
+			document.getElementById('current_ranking').innerHTML = 'BRONZE';
+		}
+	}else{
+		console.log('unrank');
+		console.log("winRate:"+ winRate + "totalGame:"+ totalGame);
+	}
+	//unRank
+}
 
 

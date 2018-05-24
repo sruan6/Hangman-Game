@@ -1,5 +1,26 @@
+body {
+	widows: 100%;
+	background: black;
+}
 .jumbotron {
 	text-align: center;
-	background: url(../images/Super-Smash-Bros.jpg);
-	background-size: cover;
+	background: black;
+	background-image: url()
+}
+.progress-bar {
+	background-color: red;
+}
+#ranking{
+	width: 100%;
+}
+.row {
+	margin-right: 0px;
+}
+footer {
+	text-align: center;
+	padding: 10px 0px 10px 0px;
+	widows: 100%;
+}
+footer p {
+	color: white;
 }
