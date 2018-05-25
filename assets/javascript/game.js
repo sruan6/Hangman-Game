@@ -11,8 +11,9 @@ var doubleWord = ['A','B','C',
 					  'V','W','X',
 					  'Y','Z'];
 //Holds the all the words
-var wordBank =['AATROX', 'AHRI', 'AKALI', 'ALISTAR', 'AMUMU', 'ANIVIA', 'ANNIE', 'ASHE', 'AURELIONSOL', 'AZIR', 'BARD', 'BLITZCRANK', 'BRAND', 'BRAUM',
- 'CAITLYN', 'CAMILLE', 'CASSIOPEIA', 'CHOGATH', 'CORKI', 'DARIUS', 'DIANA', 'DRMUNDO', 'DRAVEN', 'EKKO', 'ELISE', 'EVELYNN', 'EZREAL', 'FIIDLESTICKS', 'FIORA', 'FIZZ', 'GAILO', 'GANGPLANK', 'GAREN', 'GNAR', 'GRAGAS', 'GRAVES', 'HECARIM', 'HEIMERDINGER', 'ILLAOI', 'IRELLA', 'IVERN', 'JANNA'];
+var wordBank =['AATROX', 'AHRI', 'AKALI', 'ALISTAR', 'AMUMU', 'ANIVIA', 'ANNIE', 'ASHE', 'AURELIONSOL', 'AZIR', 'BARD', 'BLITZCRANK', 'BRAND', 'BRAUM', 
+'CAITLYN', 'CAMILLE', 'CASSIOPEIA', 'CHOGATH', 'CORKI', 'DARIUS', 'DIANA', 'DRMUNDO', 'DRAVEN', 'EKKO', 'ELISE', 'EVELYNN', 'EZREAL', 'FIIDLESTICKS', 
+'FIORA', 'FIZZ', 'GAILO', 'GANGPLANK', 'GAREN', 'GNAR', 'GRAGAS', 'GRAVES', 'HECARIM', 'HEIMERDINGER', 'ILLAOI', 'IRELLA', 'IVERN', 'JANNA'];
 //Holds choosenWord
 var choosenWord = "";
 //Holds letters in word
@@ -26,7 +27,6 @@ var wrongLetters = [];
 //Counters
 var winCount = 0;
 var loseCount = 0;
-var killCount = 0;
 var guessesLeft = 5;
 var rightGuessCounter = 0;
 var progressBar = 100;
@@ -58,7 +58,6 @@ function reset()
 	//RESET
 	//===========================================================
 	letterGuessed = 0;
-	killCount = 0;
 	rightGuessCounter = 0;
 	guessesLeft = 5;
 	progressBar = 100;
@@ -167,20 +166,6 @@ function compareLetters(userKey)
 							rightGuessCounter++;
 							blanksAndSuccesses[i] = userKey;
 							document.getElementById('wordToGuess').innerHTML = blanksAndSuccesses.join(' ');
-							killCount++;
-							if(killCount === 1) {
-								console.log('You Slain an Enemy')
-							}else if(killCount === 2) {
-								console.log('Doublekill')
-							}else if(killCount === 3) {
-								console.log('Triplekill')
-							}else if(killCount === 4) {
-								console.log('Quadrakill')
-							}else if(killCount === 5) {
-								console.log('Pentakill')
-							}else if(killCount > 5) {
-								console.log("Killing Spree")
-							}
 						}	
 					}
 					//Test / Debug
@@ -191,12 +176,8 @@ function compareLetters(userKey)
 				{
 					wrongLetters.push(userKey);
 					guessesLeft--;
-					NewprogressBar = (progressBar-=20);
-					if(killCount > 2) {
-						killCount = 0;
-						console.log('Shutdown')
-					}
-					killCount = 0;
+					NewprogressBar = (progressBar-=20)
+				
 					//Changes HTML
 					document.getElementById('numGuesses').innerHTML = guessesLeft;
 					document.getElementById('wrongGuesses').innerHTML = wrongLetters;
@@ -215,30 +196,30 @@ function winLose()
 	// When number blanks if filled with right words then you win
 	if(rightGuessCounter === numBlanks)
 	{	
-		winElement.play();
+		// winElement.play();
 		//Counts Wins 
 		winCount++;
 		totalGame++;
 		//Changes HTML
 		document.getElementById('winCounter').innerHTML = winCount;
-		// setTimeout(function(){ alert('VICTORY');  }, 10);
-		// setTimeout(function(){ 
-		// 	reset();  
-		// }, 1000);
+		setTimeout(function(){ alert('VICTORY');  }, 10);
+		setTimeout(function(){ 
+			reset();  
+		}, 1000);
 	}
 	// When number of Guesses reaches 0 then You lose
 	else if(progressBar === 0)
 	{	
-		loseElement.play();
+		// loseElement.play();
 		//Counts losses
 		loseCount++;
 		totalGame++;
 		//Changes HTML
 		document.getElementById('lossCounter').innerHTML = loseCount;
-		// setTimeout(function(){ alert('DEFEAT'); }, 10);
-		// setTimeout(function(){ 
-		// 	reset(); 
-		// }, 1000);
+		setTimeout(function(){ alert('DEFEAT'); }, 10);
+		setTimeout(function(){ 
+			reset(); 
+		}, 1000);
 	}
 }
 function ranking()
