@@ -29,6 +29,7 @@ var wrongLetters = [];
 //Counters
 var winCount = 0;
 var loseCount = 0;
+var killCount = 0;
 var guessesLeft = 5;
 var rightGuessCounter = 0;
 var progressBar = 100;
@@ -197,6 +198,16 @@ function winLose()
 		//Counts Wins 
 		winCount++;
 		totalGame++;
+		killCount++;
+		if(killCount === 2){
+			console.log('Doublekill');
+		}else if(killCount === 3){
+			console.log('Triplekill');
+		}else if(killCount === 4){
+			console.log('QuadraKill');
+		}else if(killCount === 5){
+			console.log('Pentakill');
+		};
 		//Changes HTML
 		document.getElementById('winCounter').innerHTML = winCount;
 		setTimeout(function(){ alert('VICTORY');  }, 10);
@@ -211,6 +222,10 @@ function winLose()
 		//Counts losses
 		loseCount++;
 		totalGame++;
+		if(killCount > 2) {
+			console.log('Shutdown')
+		};
+		killCount = 0;ss
 		//Changes HTML
 		document.getElementById('lossCounter').innerHTML = loseCount;
 		setTimeout(function(){ alert('DEFEAT'); }, 10);
