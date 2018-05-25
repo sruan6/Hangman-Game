@@ -225,7 +225,7 @@ function winLose()
 		if(killCount > 2) {
 			console.log('Shutdown')
 		};
-		killCount = 0;ss
+		killCount = 0;
 		//Changes HTML
 		document.getElementById('lossCounter').innerHTML = loseCount;
 		setTimeout(function(){ alert('DEFEAT'); }, 10);
