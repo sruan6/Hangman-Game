@@ -26,16 +26,17 @@ var wrongLetters = [];
 //Counters
 var winCount = 0;
 var loseCount = 0;
+var killCount = 0;
 var guessesLeft = 5;
 var rightGuessCounter = 0;
 var progressBar = 100;
 var NewprogressBar = 0;
 var totalGame = 0;
 // sounds
-var winElement = document.createElement("audio");
-winElement.setAttribute("src", "assets/sound/Super Mario Bros - Level Complete.mp3");
-var loseElement = document.createElement("audio");
-loseElement.setAttribute("src", "assets/sound/210-game-over.mp3");
+// var winElement = document.createElement("audio");
+// winElement.setAttribute("src", "assets/sound/Super Mario Bros - Level Complete.mp3");
+// var loseElement = document.createElement("audio");
+// loseElement.setAttribute("src", "assets/sound/210-game-over.mp3");
 
 // images
 var fruitsArray = [
@@ -57,6 +58,7 @@ function reset()
 	//RESET
 	//===========================================================
 	letterGuessed = 0;
+	killCount = 0;
 	rightGuessCounter = 0;
 	guessesLeft = 5;
 	progressBar = 100;
@@ -165,6 +167,20 @@ function compareLetters(userKey)
 							rightGuessCounter++;
 							blanksAndSuccesses[i] = userKey;
 							document.getElementById('wordToGuess').innerHTML = blanksAndSuccesses.join(' ');
+							killCount++;
+							if(killCount === 1) {
+								console.log('You Slain an Enemy')
+							}else if(killCount === 2) {
+								console.log('Doublekill')
+							}else if(killCount === 3) {
+								console.log('Triplekill')
+							}else if(killCount === 4) {
+								console.log('Quadrakill')
+							}else if(killCount === 5) {
+								console.log('Pentakill')
+							}else if(killCount > 5) {
+								console.log("Killing Spree")
+							}
 						}	
 					}
 					//Test / Debug
@@ -175,8 +191,12 @@ function compareLetters(userKey)
 				{
 					wrongLetters.push(userKey);
 					guessesLeft--;
-					NewprogressBar = (progressBar-=20)
-				
+					NewprogressBar = (progressBar-=20);
+					if(killCount > 2) {
+						killCount = 0;
+						console.log('Shutdown')
+					}
+					killCount = 0;
 					//Changes HTML
 					document.getElementById('numGuesses').innerHTML = guessesLeft;
 					document.getElementById('wrongGuesses').innerHTML = wrongLetters;
@@ -201,10 +221,10 @@ function winLose()
 		totalGame++;
 		//Changes HTML
 		document.getElementById('winCounter').innerHTML = winCount;
-		setTimeout(function(){ alert('VICTORY');  }, 10);
-		setTimeout(function(){ 
-			reset();  
-		}, 1000);
+		// setTimeout(function(){ alert('VICTORY');  }, 10);
+		// setTimeout(function(){ 
+		// 	reset();  
+		// }, 1000);
 	}
 	// When number of Guesses reaches 0 then You lose
 	else if(progressBar === 0)
@@ -215,10 +235,10 @@ function winLose()
 		totalGame++;
 		//Changes HTML
 		document.getElementById('lossCounter').innerHTML = loseCount;
-		setTimeout(function(){ alert('DEFEAT'); }, 10);
-		setTimeout(function(){ 
-			reset(); 
-		}, 1000);
+		// setTimeout(function(){ alert('DEFEAT'); }, 10);
+		// setTimeout(function(){ 
+		// 	reset(); 
+		// }, 1000);
 	}
 }
 function ranking()
