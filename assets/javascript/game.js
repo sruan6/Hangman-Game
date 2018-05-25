@@ -223,7 +223,8 @@ function winLose()
 		loseCount++;
 		totalGame++;
 		if(killCount > 2) {
-			console.log('Shutdown')
+			console.log('Shutdown');
+			killCount = 0;
 		};
 		killCount = 0;
 		//Changes HTML
@@ -239,7 +240,7 @@ function ranking()
 	var winRate = ((winCount)/(totalGame));
 
 	//rank
-	if( totalGame >= 9) {
+	if( totalGame > 9) {
 		if(winRate == 1) {
 			document.getElementById('ranking').src = "./assets/images/challenger.png";
 			console.log("winRate:"+ winRate + "totalGame:"+ totalGame);

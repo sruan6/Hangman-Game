@@ -1,6 +1,14 @@
 body {
-	widows: 100%;
+	width: 100%;
+	height: 100%;
 	background: black;
+	overflow-y: scroll;
+}
+.info {
+	position: relative;
+	top: 0px;
+	left: 0;
+	right: 0;
 }
 .jumbotron {
 	text-align: center;
@@ -17,8 +25,8 @@ body {
 	margin-right: 0px;
 }
 footer {
-	position: absolute;
-	bottom: 0;
+	position: relative;
+	bottom: 0px;
 	left: 0;
 	right: 0;
 	widows: 100%;
