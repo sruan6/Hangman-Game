@@ -12,8 +12,10 @@ var doubleWord = ['A','B','C',
 					  'Y','Z'];
 //Holds the all the words
 var wordBank =['AATROX', 'AHRI', 'AKALI', 'ALISTAR', 'AMUMU', 'ANIVIA', 'ANNIE', 'ASHE', 'AURELIONSOL', 'AZIR', 'BARD', 'BLITZCRANK', 'BRAND', 'BRAUM', 
-'CAITLYN', 'CAMILLE', 'CASSIOPEIA', 'CHOGATH', 'CORKI', 'DARIUS', 'DIANA', 'DRMUNDO', 'DRAVEN', 'EKKO', 'ELISE', 'EVELYNN', 'EZREAL', 'FIIDLESTICKS', 
-'FIORA', 'FIZZ', 'GAILO', 'GANGPLANK', 'GAREN', 'GNAR', 'GRAGAS', 'GRAVES', 'HECARIM', 'HEIMERDINGER', 'ILLAOI', 'IRELLA', 'IVERN', 'JANNA'];
+'CAITLYN', 'CAMILLE', 'CASSIOPEIA', 'CHOGATH', 'CORKI', 'DARIUS', 'DIANA', 'DRMUNDO', 'DRAVEN', 'EKKO', 'ELISE', 'EVELYNN', 'EZREAL', 'FIDDLESTICKS', 
+'FIORA', 'FIZZ', 'GALIO', 'GANGPLANK', 'GAREN', 'GNAR', 'GRAGAS', 'GRAVES', 'HECARIM', 'HEIMERDINGER', 'ILLAOI', 'IRELLA', 'IVERN', 'JANNA', 'JARVAN', ' JAX',
+'JAYCE', 'JHIN', 'JINX', 'KAISA', 'KALISTA', 'KARMA', 'KARTHUS', 'KASSADIN', 'KATARINA', 'KAYLE', 'KAYN', 'KENNEN', 'KHAZIX', 'KINDRED', 'KLED', 'KOGMAW', 'LEBLANC', 
+'LEESIN', 'LEONA', ' LISSANDRA', 'LUCIAN', 'LULU', 'LUX', 'MALPHITE', 'MALZAHAR', 'MAOKAI', 'MASTERYI'];
 //Holds choosenWord
 var choosenWord = "";
 //Holds letters in word
@@ -38,12 +40,7 @@ var totalGame = 0;
 // var loseElement = document.createElement("audio");
 // loseElement.setAttribute("src", "assets/sound/210-game-over.mp3");
 
-// images
-var fruitsArray = [
-  { name: 'Banana', image: '../images/pikachu.jpg' }, 
-  { name: 'Apple', image: 'apple.jpg' }, 
-  { name: 'Orange', image: 'orange.jpg' }
-];
+
 //FUNCTIONS
 //----------------------------------------
 function reset()
